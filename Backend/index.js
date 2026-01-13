@@ -5,10 +5,10 @@ import dotenv from 'dotenv';
 dotenv.config({});
 
 import connectdb from './config/db.js'
+import userRoute from './routes/user.route.js'
 
 const app = express()
 
-const PORT = process.env.PORT || 3000;
 
 //Some important MiddleWares
 app.use(express.json())
@@ -27,6 +27,10 @@ app.get('/',(req,res)=>{
     res.send("Hello World ..");
 })
 
+app.use("/api/v1/user",userRoute);
+
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
     connectdb();
     console.log(`Server running at ${PORT}`)
