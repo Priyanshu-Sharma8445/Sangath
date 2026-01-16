@@ -18,12 +18,15 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 
-const corsOption ={
-    origin : 'http://localhost:5173',
-    credential : true
-}
-app.use(cors(corsOption));
-
+// const corsOption ={
+//     origin : 'http://localhost:5173',
+//     credential : true
+// }
+// app.use(cors(corsOption));
+app.use(cors({
+  origin: "http://localhost:5173", // Vite default
+  credentials: true
+}))
 
 app.get('/',(req,res)=>{
     res.send("Hello World ..");
