@@ -1,5 +1,5 @@
 <h1>Sangath - A New Era of Social Connection</h1>
-<p>Sangath is an innovative social media platform designed to connect people, share moments, and foster meaningful interactions. While inspired by Instagram, Sangath introduces fresh features that make it a unique and captivating experience for users worldwide.</p>
+<p>Sangath is an innovative social media platform designed to connect people, share moments, and foster meaningful interactions.  Sangath introduces fresh features that make it a unique and captivating experience for users worldwide.</p>
 <h2>Key Features</h2>
 <ul>
                 <li><strong>Real-Time Messaging:</strong> Leveraged WebSocket technology for instant updates.</li>
@@ -18,7 +18,7 @@
                 <li><strong>Database:</strong> MongoDB</li>
                 <li><strong>WebSocket Integration:</strong> Socket.IO</li>
                 <li><strong>UI/UX Design:</strong> Tailwind CSS</li>
-                <li><strong>Deployment:</strong> Atlas</li>
+                <li><strong>Deployment:</strong> Render</li>
             </ul>
         </section>
     </div>
