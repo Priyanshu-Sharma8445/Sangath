@@ -29,7 +29,7 @@ export const addNewPost = async (req, res) => {
         });
         const user = await User.findById(authorId);
         if (user) {
-            user.posts.push(post._id);
+            user.post.push(post._id);
             await user.save();
         }
 
