@@ -15,7 +15,7 @@ const EditProfile = () => {
     const { user } = useSelector(store => store.auth);
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState({
-        profilePhoto: user?.profilePicture,
+        profilePicture: user?.profilePicture,
         bio: user?.bio,
         gender: user?.gender
     });
@@ -24,28 +24,24 @@ const EditProfile = () => {
 
     const fileChangeHandler = (e) => {
         const file = e.target.files?.[0];
-        if (file) setInput({ ...input, profilePhoto: file });
+        if (file) setInput({ ...input, profilePicture: file });
     }
 
     const selectChangeHandler = (value) => {
         setInput({ ...input, gender: value });
     }
 
-
     const editProfileHandler = async () => {
-        console.log(input);
         const formData = new FormData();
         formData.append("bio", input.bio);
         formData.append("gender", input.gender);
-        if(input.profilePhoto){
-            formData.append("profilePhoto", input.profilePhoto);
+        if(input.profilePicture){
+            formData.append("profilePicture", input.profilePicture);
         }
         try {
             setLoading(true);
             const res = await axios.post('http://localhost:8000/api/v1/user/profile/edit', formData,{
-                headers:{
-                    'Content-Type':'multipart/form-data'
-                },
+                headers:{ 'Content-Type':'multipart/form-data' },
                 withCredentials:true
             });
             if(res.data.success){
@@ -67,51 +63,68 @@ const EditProfile = () => {
             setLoading(false);
         }
     }
+
     return (
-        <div className='flex max-w-2xl mx-auto pl-10'>
-            <section className='flex flex-col gap-6 w-full my-8'>
-                <h1 className='font-bold text-xl'>Edit Profile</h1>
-                <div className='flex items-center justify-between bg-gray-100 rounded-xl p-4'>
-                    <div className='flex items-center gap-3'>
-                        <Avatar>
-                            <AvatarImage src={user?.profilePicture} alt="post_image" />
-                            <AvatarFallback>CN</AvatarFallback>
+        <div className='flex max-w-2xl mx-auto pl-10 h-full justify-center items-center'>
+            {/* GLASS CONTAINER */}
+            <section className='flex flex-col gap-6 w-full my-8 bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-md shadow-2xl'>
+                
+                <h1 className='font-bold text-xl text-slate-100 border-b border-white/10 pb-4'>Edit Profile</h1>
+                
+                {/* Profile Photo Section */}
+                <div className='flex items-center justify-between bg-black/20 rounded-xl p-4 border border-white/5'>
+                    <div className='flex items-center gap-4'>
+                        <Avatar className="w-14 h-14 border border-white/20">
+                            <AvatarImage src={user?.profilePicture} alt="post_image" className="object-cover" />
+                            <AvatarFallback className="bg-slate-800 text-white">CN</AvatarFallback>
                         </Avatar>
                         <div>
-                            <h1 className='font-bold text-sm'>{user?.username}</h1>
-                            <span className='text-gray-600'>{user?.bio || 'Bio here...'}</span>
+                            <h1 className='font-bold text-sm text-slate-100'>{user?.username}</h1>
+                            <span className='text-slate-400 text-xs'>{user?.bio || 'Bio here...'}</span>
                         </div>
                     </div>
                     <input ref={imageRef} onChange={fileChangeHandler} type='file' className='hidden' />
-                    <Button onClick={() => imageRef?.current.click()} className='bg-[#0095F6] h-8 hover:bg-[#318bc7]'>Change photo</Button>
+                    <Button onClick={() => imageRef?.current.click()} className='bg-indigo-600 hover:bg-indigo-700 text-white h-9 border-0'>Change photo</Button>
                 </div>
+                
+                {/* Bio Section */}
                 <div>
-                    <h1 className='font-bold text-xl mb-2'>Bio</h1>
-                    <Textarea value={input.bio} onChange={(e) => setInput({ ...input, bio: e.target.value })} name='bio' className="focus-visible:ring-transparent" />
+                    <h1 className='font-bold text-xl mb-2 text-slate-200'>Bio</h1>
+                    <Textarea 
+                        value={input.bio} 
+                        onChange={(e) => setInput({ ...input, bio: e.target.value })} 
+                        name='bio' 
+                        className="focus-visible:ring-offset-0 focus-visible:ring-0 bg-black/20 border-white/10 text-slate-200 placeholder:text-slate-600 min-h-[100px]" 
+                        placeholder="Tell us a little bit about yourself..."
+                    />
                 </div>
+                
+                {/* Gender Section */}
                 <div>
-                    <h1 className='font-bold mb-2'>Gender</h1>
+                    <h1 className='font-bold mb-2 text-slate-200'>Gender</h1>
                     <Select defaultValue={input.gender} onValueChange={selectChangeHandler}>
-                        <SelectTrigger className="w-full">
-                            <SelectValue />
+                        <SelectTrigger className="w-full bg-black/20 border-white/10 text-slate-200 focus:ring-0 focus:ring-offset-0">
+                            <SelectValue placeholder="Select a gender" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-slate-900 border-white/10 text-slate-200">
                             <SelectGroup>
-                                <SelectItem value="male">Male</SelectItem>
-                                <SelectItem value="female">Female</SelectItem>
+                                <SelectItem value="male" className="focus:bg-indigo-600 focus:text-white cursor-pointer">Male</SelectItem>
+                                <SelectItem value="female" className="focus:bg-indigo-600 focus:text-white cursor-pointer">Female</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
                 </div>
-                <div className='flex justify-end'>
+                
+                {/* Submit Button */}
+                <div className='flex justify-end pt-4 border-t border-white/10'>
                     {
                         loading ? (
-                            <Button className='w-fit bg-[#0095F6] hover:bg-[#2a8ccd]'>
+                            <Button className='w-fit bg-indigo-600 hover:bg-indigo-700 text-white'>
                                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />
                                 Please wait
                             </Button>
                         ) : (
-                            <Button onClick={editProfileHandler} className='w-fit bg-[#0095F6] hover:bg-[#2a8ccd]'>Submit</Button>
+                            <Button onClick={editProfileHandler} className='w-fit bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-500/20 transition-all duration-300'>Submit</Button>
                         )
                     }
                 </div>

@@ -20,7 +20,14 @@ const Messages = ({ selectedUser }) => {
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <span>{selectedUser?.username}</span>
-                    <Link to={`/profile/${selectedUser?._id}`}><Button className="h-8 my-2" variant="secondary">View profile</Button></Link>
+                    <Link to={`/profile/${selectedUser?._id}`}>
+                        <Button 
+  variant="secondary" 
+  className="h-8 my-2 w-full bg-white/5 hover:bg-white/10 text-white/90 text-xs font-medium border border-white/10 hover:border-white/20 rounded-lg transition-all backdrop-blur-md shadow-sm"
+>
+  View profile
+</Button>
+                    </Link>
                 </div>
             </div>
             <div className='flex flex-col gap-3'>

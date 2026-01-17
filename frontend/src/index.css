@@ -121,3 +121,31 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* --- Add to your globals.css / index.css --- */
+
+/* Animation for stars moving upward */
+@keyframes galaxyMoveUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2000px); }
+}
+
+/* Animation for slowly rotating nebula clouds */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slower-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Utility class to hide scrollbar in main content area */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
