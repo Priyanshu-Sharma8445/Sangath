@@ -1,25 +1,4 @@
 
-// import React from 'react'
-// import { Outlet } from 'react-router-dom'
-// import LeftSidebar from './LeftSidebar'
-
-// const MainLayout = () => {
-//   return (
-
-//     <div className="flex w-full h-screen overflow-hidden">
-        
-
-//         <LeftSidebar/>
-
-//         <div className="flex-1 h-full overflow-y-auto no-scrollbar">
-//             <Outlet/>
-//         </div>
-//     </div>
-//   )
-// }
-
-// export default MainLayout
-
 import React, { useMemo } from 'react'
 import { Outlet } from 'react-router-dom'
 import LeftSidebar from './LeftSidebar'
